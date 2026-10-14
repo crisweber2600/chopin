@@ -61,6 +61,7 @@ function server(port: number, database: string, extra: Record<string, string>) {
 			CHOPIN_SETUP_AGENTS: "",
 			...extra,
 		},
+		timeout: 240_000,
 		reuseExistingServer: !process.env.CI,
 		gracefulShutdown: { signal: "SIGTERM" as const, timeout: 2_000 },
 	};
@@ -69,6 +70,7 @@ function server(port: number, database: string, extra: Record<string, string>) {
 function harnessServer(port: number, database: string) {
 	return {
 		command: "bun --preload ./e2e/github.ts --preload ./e2e/harness/preload.ts"
+			+ " --preload ./e2e/initiative-preload.ts"
 			+ " apps/server/src/main.ts",
 		cwd: ROOT,
 		url: `http://${HOST}:${port}/`,
@@ -78,6 +80,11 @@ function harnessServer(port: number, database: string) {
 			AGENT: "on",
 			CONVERSATION_PLAN: "off",
 			HARNESS: "e2e-fake",
+			CONVERSATION_INITIATIVE: "on",
+			CONVERSATION_INITIATIVE_MODEL: "jev-e2e",
+			CONVERSATION_INITIATIVE_SILENCE_MS: "1000",
+			JEV_API_KEY: "e2e-jev-only",
+			JEV_MODEL: "jev-e2e",
 			BACKGROUND_JOBS: "off",
 			WEB_RESEARCH: "off",
 			STORAGE_DRIVER: "postgres",
@@ -92,6 +99,7 @@ function harnessServer(port: number, database: string) {
 			DEV_QUESTIONS: "",
 			DEV_COMMENTS: "",
 		},
+		timeout: 240_000,
 		reuseExistingServer: !process.env.CI,
 		gracefulShutdown: { signal: "SIGTERM" as const, timeout: 2_000 },
 	};
@@ -173,6 +181,7 @@ export default defineConfig({
 				"**/responsive*.e2e.ts",
 				"**/sidecar.e2e.ts",
 				"**/harness.e2e.ts",
+				"**/conversation-initiative.e2e.ts",
 				"**/document-title-naming.e2e.ts",
 				"**/harness-comments.e2e.ts",
 				"**/harness-decisions-deck.e2e.ts",
@@ -207,6 +216,7 @@ export default defineConfig({
 			name: "harness",
 			testMatch: [
 				"**/harness.e2e.ts",
+				"**/conversation-initiative.e2e.ts",
 				"**/document-title-naming.e2e.ts",
 				"**/harness-comments.e2e.ts",
 				"**/harness-decisions-deck.e2e.ts",
