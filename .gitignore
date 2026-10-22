@@ -22,6 +22,9 @@ e2e/blob-report/
 .zed/
 
 # Agents
+# Keep project-local skill links, but not other Hermes runtime state.
+.hermes/*
+!.hermes/skills/
 .codex/
 .claude/
 .Claude/

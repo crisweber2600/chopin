@@ -20,6 +20,28 @@ The most useful technical references are:
 - [Experimental implementation lifecycle](docs/implementation-lifecycle.md)
 - [Self-hosting](docs/self-hosting.md)
 
+## Agent skills
+
+Matt Pocock's skills are installed in `.agents/skills/`, with project-local Hermes
+links in `.hermes/skills/`. Start with `ask-matt` when choosing a workflow. Follow
+the repository-specific engineering and security rules in this file alongside
+those skills.
+
+### Issue tracker
+
+Track specifications and work in GitHub Issues on `crisweber2600/chopin`.
+Before tracker operations, read [the issue-tracker guidance](docs/agents/issue-tracker.md).
+
+### Triage labels
+
+Use Matt's five default triage roles. Before triage, read
+[the label mapping](docs/agents/triage-labels.md).
+
+### Domain docs
+
+Use one shared root glossary and `docs/adr/`, created lazily as terms and decisions
+are agreed. Before domain exploration, read [the domain-doc rules](docs/agents/domain.md).
+
 ## Commands
 
 ```bash
