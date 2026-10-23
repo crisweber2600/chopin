@@ -5,6 +5,24 @@ repository-connected documents. One shared domain context across the monorepo.
 
 ## Language
 
+### Repository context
+
+**Primary repository**:
+The single repository that gives a document its home and repository context.
+References to other repositories do not change that home.
+
+**Azure project**:
+An Azure DevOps project that groups repositories and work items.
+_Avoid_: project (when the distinction from a Hermes project is unclear)
+
+**Hermes project**:
+A person's workspace grouping in Hermes, which may include several repositories
+and related conversations. It is neither an Azure project nor a document-access grant.
+
+**Work item**:
+An item of tracked work in Azure Boards that may be linked to a document.
+A document does not require a work item and is not itself a work item.
+
 ### Authoring
 
 **Document**:
@@ -28,6 +46,10 @@ independently created, removed, or altered.
 
 ### Collaboration
 
+**Deployment operator**:
+A person authorized to manage a Chopin deployment's admitted projects and operational controls.
+This role does not grant another person's Azure permissions.
+
 **Channel**:
 The durable collaboration container for one document, its Chat, decisions, and
 repository identity.
@@ -44,6 +66,14 @@ The identity of one collaborative document history. A fresh epoch makes clients
 discard incompatible updates.
 
 ### Agents
+
+**Requester**:
+The person whose action starts a Planner turn, coding run, or background job.
+The requester is distinct from the owner of the agent connection.
+
+**Agent owner**:
+The human responsible for an ACP agent connection whose model access is shared.
+Agent ownership grants neither exclusive model use nor Azure repository or work-item permissions.
 
 **Planner**:
 Chopin's hosted document agent.
